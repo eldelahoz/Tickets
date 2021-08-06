@@ -1,0 +1,60 @@
+QWidget{
+	color: rgb(221, 221, 221);
+	font: 10pt "Segoe UI";
+}
+
+QToolTip {
+	color: #ffffff;
+	background-color: rgba(33, 37, 43, 180);
+	border: 1px solid rgb(44, 49, 58);
+	background-image: none;
+	background-position: left center;
+    background-repeat: no-repeat;
+	border: none;
+	border-left: 2px solid rgb(255, 186, 121);
+	text-align: left;
+	padding-left: 8px;
+	margin: 0px;
+}
+
+#styles{
+	background-color: rgb(40, 44, 52);
+}
+
+#topCont{	
+	background-color: rgb(33, 37, 43);
+}
+
+#bottomCont{
+	background-color: rgb(33, 37, 43);
+}
+
+#titulo{
+	font-style: italic;
+}
+
+/* Top Buttons */
+#buttonRight .QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }
+#buttonRight .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: solid; border-radius: 4px; }
+#buttonRight .QPushButton:pressed { background-color: rgb(23, 26, 30); border-style: solid; border-radius: 4px; }
+
+/* #minimizarBtn{
+	background-image: url(images/icons/icon_minimize.png);
+} */
+
+#buttonsEnd2 .QPushButton { background-color: rgba(206, 206, 206, 0.288); border: none;  border-radius: 5px; }
+#buttonsEnd2 .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: solid; border-radius: 4px; }
+#buttonsEnd2 .QPushButton:pressed { background-color: rgb(23, 26, 30); border-style: solid; border-radius: 4px; }
+
+#textDescripcion{
+	color:#000000;
+	font-size: 16px;
+}
+
+#usuariosBox{
+	color: #000000
+}
+
+#prioridadBox{
+	color: #000000;
+}
