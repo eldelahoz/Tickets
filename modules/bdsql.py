@@ -82,3 +82,33 @@ def tableTickets():
     rows = cursorObj.fetchall()
 
     return rows
+
+def tableUsersWrite(Cedula, Nombre, Usuario, Equipo, Ext):
+    """
+    The function write in the ticket Users
+    """
+
+    con = dbticket_connection()
+    cursorObj = con.cursor()
+
+    try:
+        cursorObj.execute("INSERT INTO Users (Cedula, Nombre, Usuario, Equipo, Ext) VALUES(?, ?, ?, ?, ?)", (Cedula, Nombre, Usuario, Equipo, Ext))
+        return con.commit()
+    except:
+        return 0
+
+def tableResueltoWrite(Noticket, DescripResuelto, CerradoDia):
+    """
+    The function write in the ticket Resuelto
+    """
+
+    con = dbticket_connection()
+    cursorObj = con.cursor()
+
+    try:
+        cursorObj.execute("INSERT INTO resueltos (Noticket, DescripResuelto) VALUES(?, ?)", (Noticket, DescripResuelto))
+        cursorObj.execute("UPDATE tickets SET Estado=?, CerradoDia=?, Resuelto=? WHERE Noticket=?", ('Cerrado', CerradoDia, 'Si', Noticket))
+        return con.commit()
+    except:
+        return 0
+

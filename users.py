@@ -1,3 +1,4 @@
+from modules.bdsql import tableUsersWrite
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
@@ -9,7 +10,7 @@ class UsersApp(QMainWindow):
     def __init__(self, parent=None, *args):
         super(UsersApp, self).__init__(parent=parent)
         self.resize(680, 250)
-        self.setWindowTitle("Tickets")
+        self.setWindowTitle("Users")
         self.styles = QWidget(self)
         self.styles.setObjectName(u"styles")
         self.styles.setStyleSheet(stylescss.stylesincss())
@@ -76,9 +77,10 @@ class UsersApp(QMainWindow):
         self.cerrarBtn.setMinimumSize(QtCore.QSize(28, 28))
         self.cerrarBtn.setMaximumSize(QtCore.QSize(28, 28))
         icon2 = QtGui.QIcon()
-        icon2.addFile(u"images/icons/icon_close.png")
+        icon2.addFile("images/icons/icon_close.png")
         self.cerrarBtn.setIcon(icon2)
         self.cerrarBtn.setIconSize(QtCore.QSize(20, 20))
+        self.cerrarBtn.clicked.connect(lambda: self.close())
 
         self.buttonRightLayout.addWidget(self.cerrarBtn)
 
@@ -202,6 +204,7 @@ class UsersApp(QMainWindow):
         self.buttonAgregar.setObjectName(u"buttonAgregar")
         self.buttonAgregar.setMinimumSize(QtCore.QSize(0, 50))
         self.buttonAgregar.setMaximumSize(QtCore.QSize(125, 50))
+        self.buttonAgregar.clicked.connect(lambda: self.agregarUser())
 
         self.buttonsEnd2Layout.addWidget(self.buttonAgregar)
 
@@ -209,6 +212,7 @@ class UsersApp(QMainWindow):
         self.buttonCerrar.setObjectName(u"buttonCerrar")
         self.buttonCerrar.setMinimumSize(QtCore.QSize(0, 50))
         self.buttonCerrar.setMaximumSize(QtCore.QSize(125, 50))
+        self.buttonCerrar.clicked.connect(lambda: self.close())
 
         self.buttonsEnd2Layout.addWidget(self.buttonCerrar)
 
@@ -246,6 +250,21 @@ class UsersApp(QMainWindow):
         self.labelBy.setText("By: De la Hoz")
         self.buttonAgregar.setText("Agregar")
         self.buttonCerrar.setText("Cerrar")
+
+    def agregarUser(self):
+        a = tableUsersWrite(self.lineEditCedula.text(), self.lineEditNombre.text(), self.lineEditUsuario.text(), self.lineEditEquipo.text(), self.lineEditExt.text())
+        msg = QMessageBox()
+        if(a is None):
+            self.lineEditCedula.clear()
+            self.lineEditUsuario.clear()
+            self.lineEditNombre.clear()
+            self.lineEditEquipo.clear()
+            self.lineEditExt.clear()
+            msg.setText("Usuario agregado con exito")
+            
+        else:
+            msg.setText(f"El usuario con este numero de cedula {self.lineEditCedula.text()} ya existe")
+        return msg.exec_()
         
         
 if __name__ == '__main__':

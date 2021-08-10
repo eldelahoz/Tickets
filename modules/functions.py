@@ -24,7 +24,13 @@ def showTickets():
     list = bdsql.tableTickets()
     for a in list:
         if a[1] == "Abierto":
-            print(a[0])
+            return (a[0])
+
+def searchTicket(NoTicket):
+    list = bdsql.tableTickets()
+    for a in list:
+        if a[0] == NoTicket:
+            return a
         
 def ticketAbierto():
     list = bdsql.tableTickets()
@@ -33,3 +39,8 @@ def ticketAbierto():
             return a[0]
             break
     return "Sin tickets abiertos"
+
+def cerrarTicket(Noticket, DescripcionResuelto, CerradoDia):
+    return bdsql.tableResueltoWrite(Noticket, DescripcionResuelto, CerradoDia)
+
+

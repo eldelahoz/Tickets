@@ -58,3 +58,11 @@ QToolTip {
 #prioridadBox{
 	color: #000000;
 }
+
+QLineEdit{
+	color: #000000;
+}
+
+QTextEdit{
+	color: #000000;
+}
