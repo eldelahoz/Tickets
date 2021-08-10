@@ -18,15 +18,8 @@
 --     Ext text
 -- );
 
--- CREATE TABLE resueltos{
+-- CREATE TABLE resueltos(
 --     Noticket INTEGER,
 --     DescripResuelto text NOT NULL,
 --     FOREIGN KEY(Noticket) REFERENCES tickets(Noticket)
--- }
-
-SELECT * FROM resueltos
-INSERT INTO tickets (Estado, Prioridad, Descripcion, AbiertoDia, Informado, CerradoDia) VALUES('Abierto', 'Baja', 'Description Test', '05/08/2021 07:57:24', 'DAVID DE LA HOZ', 'dasdas')
-.schema tickets
-UPDATE tickets
-SET Estado = "Cerrado"
-WHERE Noticket = 16
+-- )
