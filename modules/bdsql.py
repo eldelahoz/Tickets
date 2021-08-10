@@ -11,7 +11,6 @@ def dbticket_connection():
 
     try:
         con = sqlite3.connect('dbtickets.db')
-        print("Connection is established")
         return con
     except Error:
         print(Error)

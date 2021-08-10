@@ -203,6 +203,7 @@ class ResolverApp(QMainWindow):
         msg = QMessageBox()
         if NoTick is None:
             msg.setText("No hay tickets")
+            msg.exec_()
             self.label.setText("No hay ticket")
             self.labelDescripcion.setText("Descripcion: N/A")
             self.labelPrioridad.setText("Prioridad: N/A")
@@ -212,7 +213,7 @@ class ResolverApp(QMainWindow):
             self.labelDescripcion.setText(f"Descripcion: {functions.searchTicket(functions.showTickets())[3]}")
             self.labelPrioridad.setText(f"Prioridad: {functions.searchTicket(functions.showTickets())[2]}")
             self.labelInformado.setText(f"Informado: {functions.searchTicket(functions.showTickets())[5]}")
-        return msg.exec_()
+        
 
     def agregarResolver(self):
         msg = QMessageBox()
