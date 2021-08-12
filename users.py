@@ -189,7 +189,6 @@ class UsersApp(QMainWindow):
 
         self.extContLayout.addWidget(self.lineEditExt)
 
-
         self.bottomContLayout.addWidget(self.extCont)
 
         self.buttonsEnd = QFrame(self.bottomCont)
@@ -204,6 +203,7 @@ class UsersApp(QMainWindow):
         self.buttonAgregar.setObjectName(u"buttonAgregar")
         self.buttonAgregar.setMinimumSize(QtCore.QSize(0, 50))
         self.buttonAgregar.setMaximumSize(QtCore.QSize(125, 50))
+        self.msg = QMessageBox(self.buttonsEnd2)
         self.buttonAgregar.clicked.connect(lambda: self.agregarUser())
 
         self.buttonsEnd2Layout.addWidget(self.buttonAgregar)
@@ -237,7 +237,7 @@ class UsersApp(QMainWindow):
         self.stylesLayout.addWidget(self.contUsers)
 
         self.setTextCont()
-
+        
         self.setCentralWidget(self.styles)
 
     def setTextCont(self):
@@ -253,18 +253,26 @@ class UsersApp(QMainWindow):
 
     def agregarUser(self):
         a = tableUsersWrite(self.lineEditCedula.text(), self.lineEditNombre.text(), self.lineEditUsuario.text(), self.lineEditEquipo.text(), self.lineEditExt.text())
-        msg = QMessageBox()
+        
         if(a is None):
             self.lineEditCedula.clear()
             self.lineEditUsuario.clear()
             self.lineEditNombre.clear()
             self.lineEditEquipo.clear()
             self.lineEditExt.clear()
-            msg.setText("Usuario agregado con exito")
-            
+            self.msg.setWindowTitle("AGREGAR")
+            self.msg.setText("USUARIO AGREGADO")
+            img = QtGui.QPixmap("images/icons/agregar-usuario.png").scaledToHeight(32)
+            self.msg.setIconPixmap(img)
+            self.msg.setText("Usuario agregado con exito")
         else:
-            msg.setText(f"El usuario con este numero de cedula {self.lineEditCedula.text()} ya existe")
-        return msg.exec_()
+            self.msg.setWindowTitle("AGREGAR")
+            self.msg.setText(f"El usuario con este numero de cedula {self.lineEditCedula.text()} ya existe")
+       
+        resp = self.msg.exec_()
+        if resp == QMessageBox.Ok:
+            self.close()
+        
         
         
 if __name__ == '__main__':

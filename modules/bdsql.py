@@ -23,9 +23,7 @@ def sql_table_show(table):
     cursorObj = dbticket_connection().cursor()
     cursorObj.execute(f"SELECT * FROM {table}")
     rows = cursorObj.fetchall()
-
-    for row in rows:
-        print(row)
+    return rows
 
 
 def tableTicketsWrite(Prioridad, Descripcion, AbiertoDia, Informado):
@@ -108,6 +106,18 @@ def tableResueltoWrite(Noticket, DescripResuelto, CerradoDia):
         cursorObj.execute("INSERT INTO resueltos (Noticket, DescripResuelto) VALUES(?, ?)", (Noticket, DescripResuelto))
         cursorObj.execute("UPDATE tickets SET Estado=?, CerradoDia=?, Resuelto=? WHERE Noticket=?", ('Cerrado', CerradoDia, 'Si', Noticket))
         return con.commit()
+    except:
+        return 0
+
+def showCountUser():
+    con = dbticket_connection()
+    cursorObj = con.cursor()
+
+    try:
+        cursorObj = dbticket_connection().cursor()
+        cursorObj.execute("SELECT COUNT(*) FROM Users")
+        rows = cursorObj.fetchall()
+        return rows[0][0]
     except:
         return 0
 

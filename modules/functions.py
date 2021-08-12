@@ -44,3 +44,15 @@ def cerrarTicket(Noticket, DescripcionResuelto, CerradoDia):
     return bdsql.tableResueltoWrite(Noticket, DescripcionResuelto, CerradoDia)
 
 
+def setTextCont(self):
+        self.labelTitle.setText("AGREGAR USUARIOS")
+        self.labelCedula.setText("Cedula")
+        self.labelUsuario.setText("Usuario")
+        self.labelNombre.setText("Nombre")
+        self.labelEquipo.setText("Equipo")
+        self.labelExt.setText("Ext")
+        self.labelBy.setText("By: De la Hoz")
+        self.buttonAgregar.setText("Agregar")
+        self.buttonCerrar.setText("Cerrar")
+        self.buttonAddUsers.setText("Add Users")
+        self.buttonEditUsers.setText("Edit Users")
