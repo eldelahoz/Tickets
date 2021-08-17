@@ -30,6 +30,8 @@ class UsersApp(QMainWindow):
         self.topCont.setMaximumSize(QtCore.QSize(16777215, 50))
         self.topContLayout = QHBoxLayout(self.topCont)
         self.topContLayout.setObjectName(u"topContLayout")
+        # Move Windows
+
         self.leftTitle = QWidget(self.topCont)
         self.leftTitle.setObjectName(u"leftTitle")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
