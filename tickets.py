@@ -31,6 +31,15 @@ class MainApp(QMainWindow):
         self.topCont.setMaximumSize(16777215, 50)
         self.topContLayout = QHBoxLayout(self.topCont)
         self.topContLayout.setObjectName(u"topContLayout")
+        # Move Windows
+        def moveWindows(event):
+            if self.isMaximized() == False:
+                if event.buttons() == QtCore.Qt.LeftButton:
+                    self.move(self.pos() + event.globalPos() - self.clickPos)
+                    self.clickPos = event.globalPos()
+                    event.accept()
+        self.topCont.mouseMoveEvent = moveWindows
+        
         self.leftTitle = QFrame(self.topCont)
         self.leftTitle.setObjectName(u"leftTitle")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
@@ -229,6 +238,9 @@ class MainApp(QMainWindow):
     def addTitle(self):
         self.timer.start(1000)
         self.titulo.setText(f"{functions.bdsql.showLastTicket()+1}# Tickets {functions.showDateNow()} ")
+
+    def mousePressEvent(self, a0: QtGui.QMouseEvent):
+        self.clickPos = a0.globalPos()
         
 if __name__ == '__main__':
     app = QApplication([])
