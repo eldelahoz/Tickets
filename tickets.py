@@ -44,7 +44,9 @@ class MainApp(QMainWindow):
         self.topContLayout.addWidget(self.leftTitle)
         # Agregamos un label para el titulo izquierdo
         self.titulo = QLabel(self.leftTitle)
-        self.titulo.setText(f"{functions.bdsql.showLastTicket()+1}# Tickets {functions.showDateNow()} ")
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.addTitle)
+        self.addTitle()
         self.titulo.setAlignment(QtCore.Qt.AlignCenter)
         self.leftTitleLayout.addWidget(self.titulo)
         # Bottones lado derecho top bar
@@ -180,6 +182,7 @@ class MainApp(QMainWindow):
         self.buttonAgregar.setMinimumSize(QtCore.QSize(0, 50))
         self.buttonAgregar.setMaximumSize(QtCore.QSize(125, 50))
         self.buttonAgregar.setText("Agregar")
+        
         self.buttonAgregar.clicked.connect(lambda: self.functionAgregar())
         # self.buttonAgregar.clicked.connect(lambda: print(self.usuariosBox.currentText() + self.textDescripcion.toPlainText()))
 
@@ -209,23 +212,23 @@ class MainApp(QMainWindow):
 
         self.bottomContLayout.addWidget(self.labelBy)
 
-
+        self.msg = QMessageBox(self.styles)
         self.contenidoBoxLayout.addWidget(self.bottomCont)
-
 
         self.stylesLayout.addWidget(self.contenidoBox)
         # Asignacion del widget central
         self.setCentralWidget(self.styles)
 
     def functionAgregar(self):
-        msg = QMessageBox()
         if functions.bdsql.tableTicketsWrite(self.prioridadBox.currentText(),self.textDescripcion.toPlainText(),functions.showDateNow(),self.usuariosBox.currentText()) is None:
-            msg.setText("Ticket agregado correctamente")
+            self.msg.setText("Ticket agregado correctamente")
         else:
-            msg.setText("No se pudo agregar el ticket")
-        return msg.exec_()
+            self.msg.setText("No se pudo agregar el ticket")
+        self.msg.exec_()
         
-        
+    def addTitle(self):
+        self.timer.start(1000)
+        self.titulo.setText(f"{functions.bdsql.showLastTicket()+1}# Tickets {functions.showDateNow()} ")
         
 if __name__ == '__main__':
     app = QApplication([])
