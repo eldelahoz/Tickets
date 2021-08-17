@@ -31,6 +31,13 @@ class UsersApp(QMainWindow):
         self.topContLayout = QHBoxLayout(self.topCont)
         self.topContLayout.setObjectName(u"topContLayout")
         # Move Windows
+        def moveWindows(event):
+            if self.isMaximized() == False:
+                if event.buttons() == QtCore.Qt.LeftButton:
+                    self.move(self.pos() + event.globalPos() - self.clickPos)
+                    self.clickPos = event.globalPos()
+                    event.accept()
+        self.topCont.mouseMoveEvent = moveWindows
 
         self.leftTitle = QWidget(self.topCont)
         self.leftTitle.setObjectName(u"leftTitle")
@@ -341,6 +348,9 @@ class UsersApp(QMainWindow):
         for i in range(showCountUser()):
             for j in range(5):
                 self.tableWidget.setItem(i, j, QTableWidgetItem(sql_table_show("Users")[i][j]))
+
+    def mousePressEvent(self, a0: QtGui.QMouseEvent):
+        self.clickPos = a0.globalPos()
         
         
 if __name__ == '__main__':
