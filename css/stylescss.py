@@ -10,5 +10,4 @@ def stylesincss():
 	"""
 	with open('css/style.css', 'r') as s:
 		data = s.read()
-		print(data)
 		return data

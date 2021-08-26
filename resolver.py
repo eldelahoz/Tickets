@@ -16,6 +16,11 @@ class ResolverApp(QMainWindow):
         self.styles.setStyleSheet(stylescss.stylesincss())
         self.stylesLayout = QVBoxLayout(self.styles)
         self.stylesLayout.setObjectName(u"stylesLayout")
+        
+        # Ocultar los bordes de ventana
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
         self.contenidoBox = QFrame(self.styles)
         self.contenidoBox.setObjectName(u"contenidoBox")
         self.contenidoBoxLayout = QVBoxLayout(self.contenidoBox)
