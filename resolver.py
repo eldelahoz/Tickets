@@ -31,6 +31,15 @@ class ResolverApp(QMainWindow):
         self.topCont.setMaximumSize(QtCore.QSize(16777215, 50))
         self.topContLayout = QHBoxLayout(self.topCont)
         self.topContLayout.setObjectName(u"topContLayout")
+        # Move Windows
+        def moveWindows(event):
+            if self.isMaximized() == False:
+                if event.buttons() == QtCore.Qt.LeftButton:
+                    self.move(self.pos() + event.globalPos() - self.clickPos)
+                    self.clickPos = event.globalPos()
+                    event.accept()
+        self.topCont.mouseMoveEvent = moveWindows
+
         self.leftTitle = QFrame(self.topCont)
         self.leftTitle.setObjectName(u"leftTitle")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
@@ -222,15 +231,18 @@ class ResolverApp(QMainWindow):
         
 
     def agregarResolver(self):
-        msg = QMessageBox()
-        a = functions.cerrarTicket(functions.showTickets(), self.textEdit.toPlainText(), functions.showDateNow())
-        print(a)
-        if a is None:
-            msg.setText(f"Ticket cerrado {functions.showTickets()}")
+        msg = QMessageBox(self.styles)
+        ticket = functions.showTickets()
+        if ticket is not None:
+            a = functions.cerrarTicket(functions.showTickets(), self.textEdit.toPlainText(), functions.showDateNow())
+            if a is None:
+                msg.setText(f"El Ticket # {ticket} fue cerrado")
         else:
             msg.setText(f"No se pudo cerrar el ticket")
+        msg.exec_()
 
-
+    def mousePressEvent(self, a0: QtGui.QMouseEvent):
+        self.clickPos = a0.globalPos()
         
 if __name__ == '__main__':
     app = QApplication([])
