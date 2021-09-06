@@ -25,6 +25,10 @@ QMessageBox QLabel{
 	color: #aaa;
 }
 
+#msg QMessageBox .QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }
+#msg QMessageBox .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: solid; border-radius: 4px; }
+#msg QMessageBox .QPushButton:pressed { background-color: rgb(23, 26, 30); border-style: solid; border-radius: 4px; }
+
 #styles{
 	background-color: rgb(40, 44, 52);
 }
@@ -123,4 +127,10 @@ QLineEdit:hover {
 }
 QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
+}
+
+/*ComboBox*/
+QComboBox QAbstractItemView {
+	color: #ffffff;
+	background-color: rgb(27, 29, 35);
 }

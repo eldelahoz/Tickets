@@ -233,7 +233,9 @@ class MainApp(QMainWindow):
             self.msg.setText("Ticket agregado correctamente")
         else:
             self.msg.setText("No se pudo agregar el ticket")
-        self.msg.exec_()
+        resp = self.msg.exec_()
+        if resp == QMessageBox.Ok:
+            self.close()
         
     def addTitle(self):
         self.timer.start(1000)
