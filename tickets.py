@@ -222,6 +222,13 @@ class MainApp(QMainWindow):
         self.bottomContLayout.addWidget(self.labelBy)
 
         self.msg = QMessageBox(self.styles)
+        self.msg.setObjectName(u"msg")
+        self.acceptButton = QPushButton("Accept", self.styles)
+        self.acceptButton.setMinimumSize(QtCore.QSize(0, 30))
+        self.acceptButton.setMaximumSize(QtCore.QSize(125, 30))
+        self.acceptButton.setObjectName("acceptButton")
+        self.msg.addButton(self.acceptButton, QMessageBox.AcceptRole)
+        print(self.acceptButton.objectName())
         self.contenidoBoxLayout.addWidget(self.bottomCont)
 
         self.stylesLayout.addWidget(self.contenidoBox)
@@ -229,12 +236,19 @@ class MainApp(QMainWindow):
         self.setCentralWidget(self.styles)
 
     def functionAgregar(self):
-        if functions.bdsql.tableTicketsWrite(self.prioridadBox.currentText(),self.textDescripcion.toPlainText(),functions.showDateNow(),self.usuariosBox.currentText()) is None:
-            self.msg.setText("Ticket agregado correctamente")
+        if self.textDescripcion.toPlainText() != "":
+            if functions.bdsql.tableTicketsWrite(self.prioridadBox.currentText(),self.textDescripcion.toPlainText(),functions.showDateNow(),self.usuariosBox.currentText()) is None:
+                self.msg.setText("Ticket agregado correctamente")
+                self.msg.setWindowTitle("TICKET AGREGADO")
+                self.textDescripcion.clear()
+            else:
+                self.msg.setWindowTitle("NO SE AGREGO EL TICKET")
+                self.msg.setText("No se pudo agregar el ticket")
         else:
-            self.msg.setText("No se pudo agregar el ticket")
-        resp = self.msg.exec_()
-        if resp == QMessageBox.Ok:
+            self.msg.setWindowTitle("NO SE AGREGO EL TICKET")
+            self.msg.setText("No puede agregar un ticket <span style='color:red'>sin descripcion</span>.")
+        
+        if self.msg.exec_() == 0:
             self.close()
         
     def addTitle(self):
