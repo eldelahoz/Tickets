@@ -8,6 +8,7 @@ def stylesincss():
 	Returns:
 		data: read fille styles.css
 	"""
-	with open('css/style.css', 'r') as s:
+	cwd = os.getcwd()
+	with open(cwd+'/modules/css/style.css', 'r') as s:
 		data = s.read()
 		return data

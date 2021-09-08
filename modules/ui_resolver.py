@@ -1,34 +1,32 @@
-from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
-from modules import functions
-from css import stylescss
+# Package external
+from . css.stylescss import stylesincss
 
-class MainApp(QMainWindow):
+class Ui_Resolver(QMainWindow):
     def __init__(self, parent=None, *args):
-        super(MainApp, self).__init__(parent=parent)
-        self.resize(790, 600)
+        super(Ui_Resolver, self).__init__(parent=parent)
+        self.resize(800, 500)
         self.setWindowTitle("Tickets")
         self.styles = QWidget(self)
         self.styles.setObjectName(u"styles")
+        self.styles.setStyleSheet(stylesincss())
         self.stylesLayout = QVBoxLayout(self.styles)
         self.stylesLayout.setObjectName(u"stylesLayout")
-        self.styles.setStyleSheet(stylescss.stylesincss())
+        
         # Ocultar los bordes de ventana
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
-        # Contenedor contenido
         self.contenidoBox = QFrame(self.styles)
         self.contenidoBox.setObjectName(u"contenidoBox")
         self.contenidoBoxLayout = QVBoxLayout(self.contenidoBox)
         self.contenidoBoxLayout.setObjectName(u"contenidoBoxLayout")
-        # Contenido top barra
         self.topCont = QFrame(self.contenidoBox)
         self.topCont.setObjectName(u"topCont")
-        self.topCont.setMinimumSize(0, 50)
-        self.topCont.setMaximumSize(16777215, 50)
+        self.topCont.setMinimumSize(QtCore.QSize(0, 55))
+        self.topCont.setMaximumSize(QtCore.QSize(16777215, 55))
         self.topContLayout = QHBoxLayout(self.topCont)
         self.topContLayout.setObjectName(u"topContLayout")
         # Move Windows
@@ -39,7 +37,7 @@ class MainApp(QMainWindow):
                     self.clickPos = event.globalPos()
                     event.accept()
         self.topCont.mouseMoveEvent = moveWindows
-        
+
         self.leftTitle = QFrame(self.topCont)
         self.leftTitle.setObjectName(u"leftTitle")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
@@ -49,66 +47,60 @@ class MainApp(QMainWindow):
         self.leftTitle.setSizePolicy(sizePolicy)
         self.leftTitleLayout = QHBoxLayout(self.leftTitle)
         self.leftTitleLayout.setObjectName(u"leftTitleLayout")
-        # Agregas el titlo izquiero al contenido de top bar
+        self.label = QLabel(self.leftTitle)
+        self.label.setObjectName(u"label")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.leftTitleLayout.addWidget(self.label)
+
+
         self.topContLayout.addWidget(self.leftTitle)
-        # Agregamos un label para el titulo izquierdo
-        self.titulo = QLabel(self.leftTitle)
-        self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.addTitle)
-        self.addTitle()
-        self.titulo.setAlignment(QtCore.Qt.AlignCenter)
-        self.leftTitleLayout.addWidget(self.titulo)
-        # Bottones lado derecho top bar
+
         self.buttonRight = QFrame(self.topCont)
         self.buttonRight.setObjectName(u"buttonRight")
-        self.buttonRight.setMinimumSize(0, 28)
+        self.buttonRight.setMinimumSize(QtCore.QSize(0, 28))
         self.buttonRightLayout = QHBoxLayout(self.buttonRight)
         self.buttonRightLayout.setObjectName(u"buttonRightLayout")
-        self.buttonRightLayout.setContentsMargins(0,0,0,0)
-        # Boton minimizar
+        self.buttonRightLayout.setContentsMargins(0, 0, 0, 0)
         self.minimizarBtn = QPushButton(self.buttonRight)
         self.minimizarBtn.setObjectName(u"minimizarBtn")
-        self.minimizarBtn.clicked.connect(lambda: self.showMinimized())
         sizePolicy1 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.minimizarBtn.sizePolicy().hasHeightForWidth())
         self.minimizarBtn.setSizePolicy(sizePolicy1)
-        self.minimizarBtn.setMinimumSize(28, 28)
-        self.minimizarBtn.setMaximumSize(28, 28)
-        #Icon boton minimizar
-        minimizarIcon  = QtGui.QIcon()
-        minimizarIcon.addFile("images/icons/icon_minimize.png")
-        self.minimizarBtn.setIcon(minimizarIcon)
-        self.minimizarBtn.setIconSize(QtCore.QSize(20,20))
-        # Agregamos el boton de minizar
+        self.minimizarBtn.setMinimumSize(QtCore.QSize(28, 28))
+        self.minimizarBtn.setMaximumSize(QtCore.QSize(28, 28))
+        icon = QtGui.QIcon()
+        icon.addFile(u"images/icons/icon_minimize.png")
+        self.minimizarBtn.setIcon(icon)
+        self.minimizarBtn.setIconSize(QtCore.QSize(20, 16))
+
         self.buttonRightLayout.addWidget(self.minimizarBtn)
-        # Boton maximizar
+
         self.maximizarBtn = QPushButton(self.buttonRight)
         self.maximizarBtn.setObjectName(u"maximizarBtn")
-        self.maximizarBtn.setMinimumSize(28, 28)
-        self.maximizarBtn.setMaximumSize(28, 28)
-        self.maximizarBtn.clicked.connect(lambda: self.showMaximized())
-        # Icon boton maximizar
-        maximizarIcon = QtGui.QIcon()
-        maximizarIcon.addFile("images/icons/icon_maximize.png")
-        self.maximizarBtn.setIcon(maximizarIcon)
-        self.maximizarBtn.setIconSize(QtCore.QSize(20,20))
-        # Agregamos el boton de maximizar
+        self.maximizarBtn.setMinimumSize(QtCore.QSize(28, 28))
+        self.maximizarBtn.setMaximumSize(QtCore.QSize(28, 28))
+        icon1 = QtGui.QIcon()
+        icon1.addFile(u"images/icons/icon_maximize.png")
+        self.maximizarBtn.setIcon(icon1)
+        self.maximizarBtn.setIconSize(QtCore.QSize(20, 20))
+
         self.buttonRightLayout.addWidget(self.maximizarBtn)
-        # Boton de cerrar
+
         self.cerrarBtn = QPushButton(self.buttonRight)
         self.cerrarBtn.setObjectName(u"cerrarBtn")
-        self.cerrarBtn.setMinimumSize(28, 28)
-        self.cerrarBtn.setMaximumSize(28, 28)
+        self.cerrarBtn.setMinimumSize(QtCore.QSize(28, 28))
+        self.cerrarBtn.setMaximumSize(QtCore.QSize(28, 28))
+        icon2 = QtGui.QIcon()
+        icon2.addFile(u"images/icons/icon_close.png")
+        self.cerrarBtn.setIcon(icon2)
+        self.cerrarBtn.setIconSize(QtCore.QSize(20, 20))
         self.cerrarBtn.clicked.connect(lambda: self.close())
-        # Icon boton cerrar
-        cerrarIcon = QtGui.QIcon()
-        cerrarIcon.addFile("images/icons/icon_close.png")
-        self.cerrarBtn.setIcon(cerrarIcon)
-        self.cerrarBtn.setIconSize(QtCore.QSize(20,20))
-        # Agregamos el boton de cerrar
+
         self.buttonRightLayout.addWidget(self.cerrarBtn)
+
 
         self.topContLayout.addWidget(self.buttonRight)
 
@@ -122,15 +114,9 @@ class MainApp(QMainWindow):
         self.bottomContLayout.setObjectName(u"bottomContLayout")
         self.labelDescripcion = QLabel(self.bottomCont)
         self.labelDescripcion.setObjectName(u"labelDescripcion")
-        self.labelDescripcion.setText("Descripcion")
 
         self.bottomContLayout.addWidget(self.labelDescripcion)
 
-        self.textDescripcion = QTextEdit(self.bottomCont)
-        self.textDescripcion.setObjectName(u"textDescripcion")
-
-        self.bottomContLayout.addWidget(self.textDescripcion)
-        # ----------------Medium Contect---------------------
         self.mediumCont = QFrame(self.bottomCont)
         self.mediumCont.setObjectName(u"mediumCont")
         self.mediumContLayout = QHBoxLayout(self.mediumCont)
@@ -141,16 +127,8 @@ class MainApp(QMainWindow):
         self.leftmediumContLayout.setObjectName(u"leftmediumContLayout")
         self.labelPrioridad = QLabel(self.leftmediumCont)
         self.labelPrioridad.setObjectName(u"labelPrioridad")
-        self.labelPrioridad.setText("Prioridad")
+
         self.leftmediumContLayout.addWidget(self.labelPrioridad)
-
-        self.prioridadBox = QComboBox(self.leftmediumCont)
-        self.prioridadBox.addItem("Baja")
-        self.prioridadBox.addItem("Media")
-        self.prioridadBox.addItem("Alta")
-        self.prioridadBox.setObjectName(u"prioridadBox")
-
-        self.leftmediumContLayout.addWidget(self.prioridadBox)
 
 
         self.mediumContLayout.addWidget(self.leftmediumCont)
@@ -161,19 +139,21 @@ class MainApp(QMainWindow):
         self.rightmediumContLayout.setObjectName(u"rightmediumContLayout")
         self.labelInformado = QLabel(self.rightmediumCont)
         self.labelInformado.setObjectName(u"labelInformado")
-        self.labelInformado.setText("Informado")
-        self.rightmediumContLayout.addWidget(self.labelInformado)
 
-        self.usuariosBox = QComboBox(self.rightmediumCont)
-        self.usuariosBox.setObjectName(u"usuariosBox")
-        functions.showUsers(self.usuariosBox)
-        self.rightmediumContLayout.addWidget(self.usuariosBox)
+        self.rightmediumContLayout.addWidget(self.labelInformado)
 
 
         self.mediumContLayout.addWidget(self.rightmediumCont)
 
 
         self.bottomContLayout.addWidget(self.mediumCont)
+
+        self.textEdit = QTextEdit(self.bottomCont)
+        self.textEdit.setObjectName(u"textEdit")
+        self.textEdit.setMaximumSize(QtCore.QSize(16777215, 200))
+        self.textEdit.setTabChangesFocus(True)
+        
+        self.bottomContLayout.addWidget(self.textEdit)
 
         self.buttonsEnd = QFrame(self.bottomCont)
         self.buttonsEnd.setObjectName(u"buttonsEnd")
@@ -190,10 +170,7 @@ class MainApp(QMainWindow):
         self.buttonAgregar.setObjectName(u"buttonAgregar")
         self.buttonAgregar.setMinimumSize(QtCore.QSize(0, 50))
         self.buttonAgregar.setMaximumSize(QtCore.QSize(125, 50))
-        self.buttonAgregar.setText("Agregar")
-        
-        self.buttonAgregar.clicked.connect(lambda: self.functionAgregar())
-        # self.buttonAgregar.clicked.connect(lambda: print(self.usuariosBox.currentText() + self.textDescripcion.toPlainText()))
+        self.buttonAgregar.clicked.connect(lambda: self.agregarResolver())
 
         self.buttonsEndLayout_2.addWidget(self.buttonAgregar)
 
@@ -202,7 +179,6 @@ class MainApp(QMainWindow):
         self.buttonCerrar.setMinimumSize(QtCore.QSize(0, 50))
         self.buttonCerrar.setMaximumSize(QtCore.QSize(125, 50))
         self.buttonCerrar.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.buttonCerrar.setText("Cerrar")
         self.buttonCerrar.clicked.connect(lambda: self.close())
 
         self.buttonsEndLayout_2.addWidget(self.buttonCerrar)
@@ -215,51 +191,68 @@ class MainApp(QMainWindow):
 
         self.labelBy = QLabel(self.bottomCont)
         self.labelBy.setObjectName(u"labelBy")
-        self.labelBy.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.labelBy.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.labelBy.setText("By: De la Hoz")
 
         self.bottomContLayout.addWidget(self.labelBy)
 
-        self.msg = QMessageBox(self.styles)
-        self.msg.setObjectName(u"msg")
-        self.acceptButton = QPushButton("Accept", self.styles)
-        self.acceptButton.setMinimumSize(QtCore.QSize(0, 30))
-        self.acceptButton.setMaximumSize(QtCore.QSize(125, 30))
-        self.acceptButton.setObjectName("acceptButton")
-        self.msg.addButton(self.acceptButton, QMessageBox.AcceptRole)
-        print(self.acceptButton.objectName())
+
         self.contenidoBoxLayout.addWidget(self.bottomCont)
 
-        self.stylesLayout.addWidget(self.contenidoBox)
-        # Asignacion del widget central
-        self.setCentralWidget(self.styles)
 
-    def functionAgregar(self):
-        if self.textDescripcion.toPlainText() != "":
-            if functions.bdsql.tableTicketsWrite(self.prioridadBox.currentText(),self.textDescripcion.toPlainText(),functions.showDateNow(),self.usuariosBox.currentText()) is None:
-                self.msg.setText("Ticket agregado correctamente")
-                self.msg.setWindowTitle("TICKET AGREGADO")
-                self.textDescripcion.clear()
-            else:
-                self.msg.setWindowTitle("NO SE AGREGO EL TICKET")
-                self.msg.setText("No se pudo agregar el ticket")
-        else:
-            self.msg.setWindowTitle("NO SE AGREGO EL TICKET")
-            self.msg.setText("No puede agregar un ticket <span style='color:red'>sin descripcion</span>.")
+        self.stylesLayout.addWidget(self.contenidoBox)
+
+        self.setTextResolver()
+        # self.ticketActual()
+        self.setCentralWidget(self.styles)
+    
+    def setTextResolver(self):
+        self.labelBy.setText("By: De la Hoz")
+        self.buttonAgregar.setText("Agregar")
+        self.buttonCerrar.setText("Cerrar")
         
-        if self.msg.exec_() == 0:
-            self.close()
+    # def ticketActual(self):
+    #     NoTick = functions.showTickets()
+    #     msg = QMessageBox(self.styles)
+    #     msg.setObjectName(u"msg")
+    #     PrioColor = {
+    #         'Baja': "<span style='color:green'> Baja </span>",
+    #         'Media': "<span style='color:orange'> Media </span>",
+    #         'Alta': "<span style='color:red'> Alta </span>"
+    #     }
+    #     if NoTick is None:
+    #         msg.setText("No hay tickets")
+    #         msg.exec_()
+    #         self.label.setText("No hay ticket")
+    #         self.labelDescripcion.setText("Descripcion: N/A")
+    #         self.labelPrioridad.setText("Prioridad: N/A")
+    #         self.labelInformado.setText("Informado: N/A")
+    #     else:
+    #         self.label.setText(f"TICKET# {functions.showTickets()}")
+    #         self.labelDescripcion.setText(f"Descripcion: <p style='color:red'>{functions.searchTicket(functions.showTickets())[3]}</p>")
+    #         try:
+    #             self.labelPrioridad.setText(f"Prioridad: {PrioColor[functions.searchTicket(functions.showTickets())[2]]}")
+    #         except:
+    #             self.labelPrioridad.setText("Prioridad: N/A")
+            
+    #         self.labelInformado.setText(f"Informado: {functions.searchTicket(NoTick)[5]}")
         
-    def addTitle(self):
-        self.timer.start(1000)
-        self.titulo.setText(f"{functions.bdsql.showLastTicket()+1}# Tickets {functions.showDateNow()} ")
+        
+
+    # def agregarResolver(self):
+    #     msg = QMessageBox(self.styles)
+    #     msg.setObjectName(u"msg")
+    #     ticket = functions.showTickets()
+    #     if ticket is not None:
+    #         a = functions.cerrarTicket(functions.showTickets(), self.textEdit.toPlainText(), functions.showDateNow())
+    #         if a is None:
+    #             msg.setText(f"El Ticket # {ticket} fue cerrado")
+    #             self.ticketActual()
+    #             self.textEdit.clear()
+    #             self.textEdit.setFocus()
+    #     else:
+    #         msg.setText(f"No se pudo cerrar el ticket")
+    #     msg.exec_()
 
     def mousePressEvent(self, a0: QtGui.QMouseEvent):
         self.clickPos = a0.globalPos()
         
-if __name__ == '__main__':
-    app = QApplication([])
-    window = MainApp()
-    window.show()
-    app.exec_()

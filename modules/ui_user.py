@@ -1,19 +1,18 @@
-from modules.bdsql import showCountUser, sql_table_show, tableUsersWrite
-from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
+# Package external
 from modules import functions
-from css import stylescss
+from . css.stylescss import stylesincss
 
-class UsersApp(QMainWindow):
+class Ui_User(QMainWindow):
     def __init__(self, parent=None, *args):
-        super(UsersApp, self).__init__(parent=parent)
+        super(Ui_User, self).__init__(parent=parent)
         self.resize(680, 250)
         self.setWindowTitle("Users")
         self.styles = QWidget(self)
         self.styles.setObjectName(u"styles")
-        self.styles.setStyleSheet(stylescss.stylesincss())
+        self.styles.setStyleSheet(stylesincss())
         self.stylesLayout = QVBoxLayout(self.styles)
         self.stylesLayout.setObjectName(u"stylesLayout")
         # Ocultar los bordes de ventana
@@ -253,7 +252,7 @@ class UsersApp(QMainWindow):
         __qtablewidgetitem4 = QTableWidgetItem()
         __qtablewidgetitem4.setText("Ext")
         self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
-        self.tableWidget.setRowCount(showCountUser())
+        self.tableWidget.setRowCount(functions.showCountUser())
         # Set item
         
 
@@ -316,45 +315,38 @@ class UsersApp(QMainWindow):
 
         self.contUsersLayout.addWidget(self.bottomContUsers)
         self.msg = QMessageBox(self.styles)
-        self.insertItemsTable()
+        # self.insertItemsTable()
         self.stylesLayout.addWidget(self.contUsers)
         functions.setTextContUsers(self)
         self.setCentralWidget(self.styles)
         self.centerContPage.setCurrentIndex(0)
 
-    def agregarUser(self):
-        a = tableUsersWrite(self.lineEditCedula.text(), self.lineEditNombre.text(), self.lineEditUsuario.text(), self.lineEditEquipo.text(), self.lineEditExt.text())
+    # def agregarUser(self):
+    #     # a = tableUsersWrite(self.lineEditCedula.text(), self.lineEditNombre.text(), self.lineEditUsuario.text(), self.lineEditEquipo.text(), self.lineEditExt.text())
         
-        if(a is None):
-            self.lineEditCedula.clear()
-            self.lineEditUsuario.clear()
-            self.lineEditNombre.clear()
-            self.lineEditEquipo.clear()
-            self.lineEditExt.clear()
-            self.msg.setWindowTitle("AGREGAR")
-            self.msg.setText("USUARIO AGREGADO")
-            img = QtGui.QPixmap("images/icons/agregar-usuario.png").scaledToHeight(32)
-            self.msg.setIconPixmap(img)
-            self.msg.setText("Usuario agregado con exito")
-        else:
-            self.msg.setWindowTitle("AGREGAR")
-            self.msg.setText(f"El usuario con este numero de cedula {self.lineEditCedula.text()} ya existe")
+    #     if(a is None):
+    #         self.lineEditCedula.clear()
+    #         self.lineEditUsuario.clear()
+    #         self.lineEditNombre.clear()
+    #         self.lineEditEquipo.clear()
+    #         self.lineEditExt.clear()
+    #         self.msg.setWindowTitle("AGREGAR")
+    #         self.msg.setText("USUARIO AGREGADO")
+    #         img = QtGui.QPixmap("images/icons/agregar-usuario.png").scaledToHeight(32)
+    #         self.msg.setIconPixmap(img)
+    #         self.msg.setText("Usuario agregado con exito")
+    #     else:
+    #         self.msg.setWindowTitle("AGREGAR")
+    #         self.msg.setText(f"El usuario con este numero de cedula {self.lineEditCedula.text()} ya existe")
        
-        resp = self.msg.exec_()
-        if resp == QMessageBox.Ok:
-            self.close()
+    #     resp = self.msg.exec_()
+    #     if resp == QMessageBox.Ok:
+    #         self.close()
     
-    def insertItemsTable(self):
-        for i in range(showCountUser()):
-            for j in range(5):
-                self.tableWidget.setItem(i, j, QTableWidgetItem(sql_table_show("Users")[i][j]))
+    # def insertItemsTable(self):
+    #     for i in range(showCountUser()):
+    #         for j in range(5):
+    #             self.tableWidget.setItem(i, j, QTableWidgetItem(sql_table_show("Users")[i][j]))
 
     def mousePressEvent(self, a0: QtGui.QMouseEvent):
         self.clickPos = a0.globalPos()
-        
-        
-if __name__ == '__main__':
-    app = QApplication([])
-    window = UsersApp()
-    window.show()
-    app.exec_()
