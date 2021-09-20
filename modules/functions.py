@@ -134,5 +134,3 @@ class UiResolver_Function:
     def __init__(self, UiResolver):
         UiResolver.buttonCerrar.clicked.connect(lambda: UiResolver.close())
 
-    def is_function(m: int)-> 'TestMessage':
-        return int(m*2)
