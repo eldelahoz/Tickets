@@ -39,7 +39,6 @@ class MenuApp(QMainWindow):
         self.mainResolver = Ui_Resolver()
         UiResolver_Function(self.mainResolver)
         
-        print(UiResolver_Function.is_function.__annotations__)
         self.btnResolver.clicked.connect(lambda: self.mainResolver.show())
 
 

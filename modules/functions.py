@@ -45,23 +45,20 @@ def ticketAbierto():
 def cerrarTicket(Noticket, DescripcionResuelto, CerradoDia):
     return tableResueltoWrite(Noticket, DescripcionResuelto, CerradoDia)
 
-class MoveWindows_UI:
-    def __init__(self) -> None:
+
+class UiTickets_Function:
+    def setFunctionsTicket(self):
+        self.buttonCerrar.clicked.connect(lambda: self.close())
+        self.cerrarBtn.clicked.connect(lambda: self.close())
+        showUsers(self.usuariosBox)
+                
         def moveWindows(event):
             if event.buttons() == QtCore.Qt.LeftButton:
                 self.move(self.pos() + event.globalPos() - self.clickPos)
                 self.clickPos = event.globalPos()
                 event.accept()
 
-
-class UiTickets_Function(MoveWindows_UI):
-    def setFunctionsTicket(self):
-        self.buttonCerrar.clicked.connect(lambda: self.close())
-        self.cerrarBtn.clicked.connect(lambda: self.close())
-        showUsers(self.usuariosBox)
-                
-
-        self.leftTitle.mouseMoveEvent = MoveWindows_UI
+        self.leftTitle.mouseMoveEvent = moveWindows
 
         def functionAgregar():
             if self.textDescripcion.toPlainText() != "":
