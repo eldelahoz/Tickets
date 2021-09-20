@@ -1,43 +1,29 @@
-from PyQt5 import QtGui
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
 # Package external
-from modules import functions
 from . css.stylescss import stylesincss
 
 class Ui_User(QMainWindow):
     def __init__(self, parent=None, *args):
         super(Ui_User, self).__init__(parent=parent)
-        self.resize(680, 250)
-        self.setWindowTitle("Users")
+        self.resize(773, 554)
         self.styles = QWidget(self)
         self.styles.setObjectName(u"styles")
         self.styles.setStyleSheet(stylesincss())
         self.stylesLayout = QVBoxLayout(self.styles)
         self.stylesLayout.setObjectName(u"stylesLayout")
-        # Ocultar los bordes de ventana
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        
         self.contUsers = QWidget(self.styles)
         self.contUsers.setObjectName(u"contUsers")
         self.contUsersLayout = QVBoxLayout(self.contUsers)
         self.contUsersLayout.setObjectName(u"contUsersLayout")
         self.topCont = QWidget(self.contUsers)
         self.topCont.setObjectName(u"topCont")
-        self.topCont.setMinimumSize(QtCore.QSize(0, 50))
-        self.topCont.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.topCont.setMinimumSize(QSize(0, 50))
+        self.topCont.setMaximumSize(QSize(16777215, 50))
         self.topContLayout = QHBoxLayout(self.topCont)
         self.topContLayout.setObjectName(u"topContLayout")
-        # Move Windows
-        def moveWindows(event):
-            if self.isMaximized() == False:
-                if event.buttons() == QtCore.Qt.LeftButton:
-                    self.move(self.pos() + event.globalPos() - self.clickPos)
-                    self.clickPos = event.globalPos()
-                    event.accept()
-        self.topCont.mouseMoveEvent = moveWindows
-
+        self.topContLayout.setContentsMargins(-1, 5, -1, -1)
         self.leftTitle = QWidget(self.topCont)
         self.leftTitle.setObjectName(u"leftTitle")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
@@ -49,23 +35,21 @@ class Ui_User(QMainWindow):
         self.leftTitleLayout.setObjectName(u"leftTitleLayout")
         self.labelTitle = QLabel(self.leftTitle)
         self.labelTitle.setObjectName(u"labelTitle")
-        self.labelTitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelTitle.setAlignment(Qt.AlignCenter)
 
         self.leftTitleLayout.addWidget(self.labelTitle)
 
         self.buttonAddUsers = QPushButton(self.leftTitle)
         self.buttonAddUsers.setObjectName(u"buttonAddUsers")
-        self.buttonAddUsers.setMinimumSize(QtCore.QSize(0, 23))
-        self.buttonAddUsers.setMaximumSize(QtCore.QSize(100, 23))
-        self.buttonAddUsers.clicked.connect(lambda: self.centerContPage.setCurrentWidget(self.page))
+        self.buttonAddUsers.setMinimumSize(QSize(0, 23))
+        self.buttonAddUsers.setMaximumSize(QSize(100, 23))
 
         self.leftTitleLayout.addWidget(self.buttonAddUsers)
 
         self.buttonEditUsers = QPushButton(self.leftTitle)
         self.buttonEditUsers.setObjectName(u"buttonEditUsers")
-        self.buttonEditUsers.setMinimumSize(QtCore.QSize(0, 23))
-        self.buttonEditUsers.setMaximumSize(QtCore.QSize(100, 23))
-        self.buttonEditUsers.clicked.connect(lambda: self.centerContPage.setCurrentWidget(self.page_2))
+        self.buttonEditUsers.setMinimumSize(QSize(0, 23))
+        self.buttonEditUsers.setMaximumSize(QSize(100, 23))
 
         self.leftTitleLayout.addWidget(self.buttonEditUsers)
 
@@ -74,41 +58,40 @@ class Ui_User(QMainWindow):
 
         self.buttonRight = QWidget(self.topCont)
         self.buttonRight.setObjectName(u"buttonRight")
-        self.buttonRight.setMinimumSize(QtCore.QSize(0, 28))
+        self.buttonRight.setMinimumSize(QSize(0, 28))
         self.buttonRightLayout = QHBoxLayout(self.buttonRight)
         self.buttonRightLayout.setObjectName(u"buttonRightLayout")
         self.buttonRightLayout.setContentsMargins(0, 0, 0, 0)
         self.minimizarBtn = QPushButton(self.buttonRight)
         self.minimizarBtn.setObjectName(u"minimizarBtn")
-        self.minimizarBtn.setMinimumSize(QtCore.QSize(28, 28))
-        self.minimizarBtn.setMaximumSize(QtCore.QSize(28, 28))
-        icon = QtGui.QIcon()
-        icon.addFile(u"images/icons/icon_minimize.png")
+        self.minimizarBtn.setMinimumSize(QSize(28, 28))
+        self.minimizarBtn.setMaximumSize(QSize(28, 28))
+        icon = QIcon()
+        icon.addFile(u"images/icons/icon_minimize.png", QSize(), QIcon.Normal, QIcon.Off)
         self.minimizarBtn.setIcon(icon)
-        self.minimizarBtn.setIconSize(QtCore.QSize(20, 20))
+        self.minimizarBtn.setIconSize(QSize(20, 20))
 
         self.buttonRightLayout.addWidget(self.minimizarBtn)
 
         self.maximizarBtn = QPushButton(self.buttonRight)
         self.maximizarBtn.setObjectName(u"maximizarBtn")
-        self.maximizarBtn.setMinimumSize(QtCore.QSize(28, 28))
-        self.maximizarBtn.setMaximumSize(QtCore.QSize(28, 28))
-        icon1 = QtGui.QIcon()
-        icon1.addFile(u"images/icons/icon_maximize.png")
+        self.maximizarBtn.setMinimumSize(QSize(28, 28))
+        self.maximizarBtn.setMaximumSize(QSize(28, 28))
+        icon1 = QIcon()
+        icon1.addFile(u"images/icons/icon_maximize.png", QSize(), QIcon.Normal, QIcon.Off)
         self.maximizarBtn.setIcon(icon1)
-        self.maximizarBtn.setIconSize(QtCore.QSize(20, 20))
+        self.maximizarBtn.setIconSize(QSize(20, 20))
 
         self.buttonRightLayout.addWidget(self.maximizarBtn)
 
         self.cerrarBtn = QPushButton(self.buttonRight)
         self.cerrarBtn.setObjectName(u"cerrarBtn")
-        self.cerrarBtn.setMinimumSize(QtCore.QSize(28, 28))
-        self.cerrarBtn.setMaximumSize(QtCore.QSize(28, 28))
-        icon2 = QtGui.QIcon()
-        icon2.addFile(u"images/icons/icon_close.png")
+        self.cerrarBtn.setMinimumSize(QSize(28, 28))
+        self.cerrarBtn.setMaximumSize(QSize(28, 28))
+        icon2 = QIcon()
+        icon2.addFile(u"images/icons/icon_close.png", QSize(), QIcon.Normal, QIcon.Off)
         self.cerrarBtn.setIcon(icon2)
-        self.cerrarBtn.setIconSize(QtCore.QSize(20, 20))
-        self.cerrarBtn.clicked.connect(lambda: self.close())
+        self.cerrarBtn.setIconSize(QSize(20, 20))
 
         self.buttonRightLayout.addWidget(self.cerrarBtn)
 
@@ -120,7 +103,6 @@ class Ui_User(QMainWindow):
 
         self.bottomContUsers = QWidget(self.contUsers)
         self.bottomContUsers.setObjectName(u"bottomContUsers")
-        self.bottomContUsers.setStyleSheet(u"")
         self.bottomContLayout = QVBoxLayout(self.bottomContUsers)
         self.bottomContLayout.setObjectName(u"bottomContLayout")
         self.centerContPage = QStackedWidget(self.bottomContUsers)
@@ -147,7 +129,7 @@ class Ui_User(QMainWindow):
 
         self.lineEditCedula = QLineEdit(self.contInfoUsers)
         self.lineEditCedula.setObjectName(u"lineEditCedula")
-        self.lineEditCedula.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.lineEditCedula.setStyleSheet(u"")
 
         self.contInfoUsersLayout.addWidget(self.lineEditCedula)
 
@@ -207,17 +189,16 @@ class Ui_User(QMainWindow):
         self.buttonsUsersLayout.setObjectName(u"buttonsUsersLayout")
         self.buttonAgregar = QPushButton(self.buttonsUsers)
         self.buttonAgregar.setObjectName(u"buttonAgregar")
-        self.buttonAgregar.setMinimumSize(QtCore.QSize(0, 50))
-        self.buttonAgregar.setMaximumSize(QtCore.QSize(125, 50))
-        self.buttonAgregar.clicked.connect(lambda: self.agregarUser())
+        self.buttonAgregar.setMinimumSize(QSize(0, 50))
+        self.buttonAgregar.setMaximumSize(QSize(125, 50))
 
         self.buttonsUsersLayout.addWidget(self.buttonAgregar)
 
         self.buttonCerrar = QPushButton(self.buttonsUsers)
         self.buttonCerrar.setObjectName(u"buttonCerrar")
-        self.buttonCerrar.setMinimumSize(QtCore.QSize(0, 50))
-        self.buttonCerrar.setMaximumSize(QtCore.QSize(125, 50))
-        self.buttonCerrar.clicked.connect(lambda: self.close())
+        self.buttonCerrar.setMinimumSize(QSize(0, 50))
+        self.buttonCerrar.setMaximumSize(QSize(125, 50))
+
         self.buttonsUsersLayout.addWidget(self.buttonCerrar)
 
 
@@ -236,27 +217,18 @@ class Ui_User(QMainWindow):
         self.row_4Layout = QVBoxLayout(self.row_4)
         self.row_4Layout.setObjectName(u"row_4Layout")
         self.tableWidget = QTableWidget(self.row_4)
-        self.tableWidget.setColumnCount(5)
+        if (self.tableWidget.columnCount() < 5):
+            self.tableWidget.setColumnCount(5)
         __qtablewidgetitem = QTableWidgetItem()
-        __qtablewidgetitem.setText("Cedula")
         self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
-        __qtablewidgetitem1.setText("Nombre")
         self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
-        __qtablewidgetitem2.setText("Usuario")
         self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         __qtablewidgetitem3 = QTableWidgetItem()
-        __qtablewidgetitem3.setText("Equipo")
         self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
-        __qtablewidgetitem4.setText("Ext")
         self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
-        self.tableWidget.setRowCount(functions.showCountUser())
-        # Set item
-        
-
-        
         self.tableWidget.setObjectName(u"tableWidget")
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(125)
@@ -278,15 +250,15 @@ class Ui_User(QMainWindow):
         self.row_3Layout.setObjectName(u"row_3Layout")
         self.buttonEditar = QPushButton(self.row_3)
         self.buttonEditar.setObjectName(u"buttonEditar")
-        self.buttonEditar.setMinimumSize(QtCore.QSize(0, 50))
-        self.buttonEditar.setMaximumSize(QtCore.QSize(125, 50))
+        self.buttonEditar.setMinimumSize(QSize(0, 50))
+        self.buttonEditar.setMaximumSize(QSize(125, 50))
 
         self.row_3Layout.addWidget(self.buttonEditar)
 
         self.buttonEliminar = QPushButton(self.row_3)
         self.buttonEliminar.setObjectName(u"buttonEliminar")
-        self.buttonEliminar.setMinimumSize(QtCore.QSize(0, 50))
-        self.buttonEliminar.setMaximumSize(QtCore.QSize(125, 50))
+        self.buttonEliminar.setMinimumSize(QSize(0, 50))
+        self.buttonEliminar.setMaximumSize(QSize(125, 50))
 
         self.row_3Layout.addWidget(self.buttonEliminar)
 
@@ -304,49 +276,78 @@ class Ui_User(QMainWindow):
 
         self.bottomContLayout.addWidget(self.buttonsEnd)
 
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.labelBy = QLabel(self.bottomContUsers)
         self.labelBy.setObjectName(u"labelBy")
-        self.labelBy.setMinimumSize(QtCore.QSize(0, 20))
-        self.labelBy.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.labelBy.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.labelBy.setMinimumSize(QSize(0, 20))
+        self.labelBy.setMaximumSize(QSize(16777215, 20))
+        self.labelBy.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.bottomContLayout.addWidget(self.labelBy)
+        self.horizontalLayout.addWidget(self.labelBy)
+
+        self.verticalFrame = QFrame(self.bottomContUsers)
+        self.verticalFrame.setObjectName(u"verticalFrame")
+        self.verticalFrame.setMaximumSize(QSize(20, 50))
+
+        self.horizontalLayout.addWidget(self.verticalFrame)
+
+
+        self.bottomContLayout.addLayout(self.horizontalLayout)
 
 
         self.contUsersLayout.addWidget(self.bottomContUsers)
-        self.msg = QMessageBox(self.styles)
-        # self.insertItemsTable()
+
+
         self.stylesLayout.addWidget(self.contUsers)
-        functions.setTextContUsers(self)
+
         self.setCentralWidget(self.styles)
+
+        self.retranslateUi(self)
+
         self.centerContPage.setCurrentIndex(0)
 
-    # def agregarUser(self):
-    #     # a = tableUsersWrite(self.lineEditCedula.text(), self.lineEditNombre.text(), self.lineEditUsuario.text(), self.lineEditEquipo.text(), self.lineEditExt.text())
-        
-    #     if(a is None):
-    #         self.lineEditCedula.clear()
-    #         self.lineEditUsuario.clear()
-    #         self.lineEditNombre.clear()
-    #         self.lineEditEquipo.clear()
-    #         self.lineEditExt.clear()
-    #         self.msg.setWindowTitle("AGREGAR")
-    #         self.msg.setText("USUARIO AGREGADO")
-    #         img = QtGui.QPixmap("images/icons/agregar-usuario.png").scaledToHeight(32)
-    #         self.msg.setIconPixmap(img)
-    #         self.msg.setText("Usuario agregado con exito")
-    #     else:
-    #         self.msg.setWindowTitle("AGREGAR")
-    #         self.msg.setText(f"El usuario con este numero de cedula {self.lineEditCedula.text()} ya existe")
-       
-    #     resp = self.msg.exec_()
-    #     if resp == QMessageBox.Ok:
-    #         self.close()
-    
-    # def insertItemsTable(self):
-    #     for i in range(showCountUser()):
-    #         for j in range(5):
-    #             self.tableWidget.setItem(i, j, QTableWidgetItem(sql_table_show("Users")[i][j]))
 
-    def mousePressEvent(self, a0: QtGui.QMouseEvent):
+        QMetaObject.connectSlotsByName(self)
+    # setupUi
+
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.labelTitle.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">USERS PANEL</span></p></body></html>", None))
+        self.buttonAddUsers.setText(QCoreApplication.translate("MainWindow", u"Add Users", None))
+        self.buttonEditUsers.setText(QCoreApplication.translate("MainWindow", u"View Users", None))
+        self.minimizarBtn.setText("")
+        self.maximizarBtn.setText("")
+        self.cerrarBtn.setText("")
+        self.labelCedula.setText(QCoreApplication.translate("MainWindow", u"Cedula", None))
+        self.labelNombre.setText(QCoreApplication.translate("MainWindow", u"Nombre", None))
+        self.labelUsuario.setText(QCoreApplication.translate("MainWindow", u"Usuario", None))
+        self.labelEquipo.setText(QCoreApplication.translate("MainWindow", u"Equipo", None))
+        self.labelExt.setText(QCoreApplication.translate("MainWindow", u"Ext", None))
+        self.buttonAgregar.setText(QCoreApplication.translate("MainWindow", u"AGREGAR", None))
+        self.buttonCerrar.setText(QCoreApplication.translate("MainWindow", u"CERRAR", None))
+        ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Cedula", None));
+        ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Nueva columna", None));
+        ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Usuario", None));
+        ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Equipo", None));
+        ___qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(4)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Ext", None));
+        self.buttonEditar.setText(QCoreApplication.translate("MainWindow", u"EDITAR", None))
+        self.buttonEliminar.setText(QCoreApplication.translate("MainWindow", u"ELIMINAR", None))
+        self.labelBy.setText(QCoreApplication.translate("MainWindow", u"By: De la Hoz", None))
+    # retranslateUi
+
+
+
+
+        # //////////////////////////////////
+        self.msg = QMessageBox()
+        grip = QSizeGrip(self.verticalFrame)
+
+
+    def mousePressEvent(self, a0: QMouseEvent):
         self.clickPos = a0.globalPos()

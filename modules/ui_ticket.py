@@ -9,6 +9,7 @@ class Ui_Ticket(QMainWindow):
     def __init__(self, parent=None):
         super(Ui_Ticket, self).__init__(parent=parent)
         self.resize(774, 553)
+        
         self.styles = QWidget(self)
         self.styles.setObjectName(u"styles")
         self.styles.setStyleSheet(stylesincss())
@@ -18,6 +19,7 @@ class Ui_Ticket(QMainWindow):
         self.contenidoBox.setObjectName(u"contenidoBox")
         self.contenidoBoxLayout = QVBoxLayout(self.contenidoBox)
         self.contenidoBoxLayout.setObjectName(u"contenidoBoxLayout")
+        self.contenidoBox.setMinimumSize(QSize(600, 400))
         self.topCont = QFrame(self.contenidoBox)
         self.topCont.setObjectName(u"topCont")
         self.topCont.setMinimumSize(QSize(0, 50))
@@ -167,6 +169,7 @@ class Ui_Ticket(QMainWindow):
         self.buttonAgregar.setObjectName(u"buttonAgregar")
         self.buttonAgregar.setMinimumSize(QSize(0, 50))
         self.buttonAgregar.setMaximumSize(QSize(125, 50))
+        
 
         self.buttonsEndLayout_2.addWidget(self.buttonAgregar)
 
@@ -237,7 +240,7 @@ class Ui_Ticket(QMainWindow):
     # retranslateUi
 
         
-
+        self.msg = QMessageBox(self.styles)
         # //////////////////////////////////
         self.timer = QTimer()
         self.timer.timeout.connect(self.startTitleChange)

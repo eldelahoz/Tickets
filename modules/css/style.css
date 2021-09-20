@@ -17,6 +17,7 @@ QToolTip {
 	margin: 0px;
 }
 
+/* MESSAGE BOX */
 #msg {
 	background-color: rgb(33, 37, 43);
 	
@@ -42,11 +43,6 @@ QToolTip {
 #bottomCont{
 	background-color: rgb(33, 37, 43);
 }
-
-#bottomContUsers{
-	background: transparent;
-}
-
 
 #titulo{
 	font-style: italic;
@@ -75,13 +71,6 @@ QToolTip {
 	color: #000000;
 }
 
-QLineEdit{
-	color: #000000;
-}
-
-QTextEdit{
-	color: #000000;
-}
 
 /*Pages styles*/
 #centerContPage > QWidget {

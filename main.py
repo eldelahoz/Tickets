@@ -23,19 +23,23 @@ class MenuApp(QMainWindow):
         self.btnTickets.setGeometry(30, 30, 100, 40)
 
         self.mainTicket = Ui_Ticket()
-        UiTickets_Function.setFunctions(self.mainTicket)
+        UiTickets_Function.setFunctionsTicket(self.mainTicket)
 
         self.btnTickets.clicked.connect(lambda: self.mainTicket.show())
 
         self.btnUsers = QPushButton("Usuarios", self)
         self.btnUsers.setGeometry(160, 30, 100, 40)
         self.mainUser = Ui_User()
+        UiTickets_Function.setFunctionUser(self.mainUser)
         self.btnUsers.clicked.connect(lambda: self.mainUser.show())
         
 
         self.btnResolver = QPushButton("Resolver", self)
         self.btnResolver.setGeometry(95, 80, 100, 40)
         self.mainResolver = Ui_Resolver()
+        UiResolver_Function(self.mainResolver)
+        
+        print(UiResolver_Function.is_function.__annotations__)
         self.btnResolver.clicked.connect(lambda: self.mainResolver.show())
 
 

@@ -17,7 +17,15 @@ def dbticket_connection():
     except Error:
         print(Error)
 
+def sql_table_show(table):
+    """
+    The function show all data in the tables
+    """
 
+    cursorObj = dbticket_connection().cursor()
+    cursorObj.execute(f"SELECT * FROM {table}")
+    rows = cursorObj.fetchall()
+    return rows
 # Add ticket item
 # //////////////////////////////////////
 def tableTicketsAdd(Prioridad, Descripcion, AbiertoDia, Informado):
