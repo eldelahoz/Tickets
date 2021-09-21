@@ -241,40 +241,40 @@ class Ui_Resolver(QMainWindow):
     # retranslateUi
 
 
-    def show(self) -> None:
-        self.ticketActual()
-        return super().show()
+    # def show(self) -> None:
+    #     self.ticketActual()
+    #     return super().show()
     
-    def setTextResolver(self):
-        self.labelBy.setText("By: De la Hoz")
-        self.buttonAgregar.setText("Agregar")
-        self.buttonCerrar.setText("Cerrar")
+    # def setTextResolver(self):
+    #     self.labelBy.setText("By: De la Hoz")
+    #     self.buttonAgregar.setText("Agregar")
+    #     self.buttonCerrar.setText("Cerrar")
         
-    def ticketActual(self):
-        NoTick = showTickets()
-        msg = QMessageBox(self.styles)
-        msg.setObjectName(u"msg")
-        PrioColor = {
-            'Baja': "<span style='color:green'> Baja </span>",
-            'Media': "<span style='color:orange'> Media </span>",
-            'Alta': "<span style='color:red'> Alta </span>"
-        }
-        if NoTick is None:
-            msg.setText("No hay tickets")
-            msg.exec_()
-            self.label.setText("No hay ticket")
-            self.labelDescripcion.setText("Descripcion: N/A")
-            self.labelPrioridad.setText("Prioridad: N/A")
-            self.labelInformado.setText("Informado: N/A")
-        else:
-            self.label.setText(f"TICKET# {showTickets()}")
-            self.labelDescripcion.setText(f"Descripcion: <p style='color:red'>{searchTicket(showTickets())[3]}</p>")
-            try:
-                self.labelPrioridad.setText(f"Prioridad: {PrioColor[searchTicket(showTickets())[2]]}")
-            except:
-                self.labelPrioridad.setText("Prioridad: N/A")
+    # def ticketActual(self):
+    #     NoTick = showTickets()
+    #     msg = QMessageBox(self.styles)
+    #     msg.setObjectName(u"msg")
+    #     PrioColor = {
+    #         'Baja': "<span style='color:green'> Baja </span>",
+    #         'Media': "<span style='color:orange'> Media </span>",
+    #         'Alta': "<span style='color:red'> Alta </span>"
+    #     }
+    #     if NoTick is None:
+    #         msg.setText("No hay tickets")
+    #         msg.exec_()
+    #         self.label.setText("No hay ticket")
+    #         self.labelDescripcion.setText("Descripcion: N/A")
+    #         self.labelPrioridad.setText("Prioridad: N/A")
+    #         self.labelInformado.setText("Informado: N/A")
+    #     else:
+    #         self.label.setText(f"TICKET# {showTickets()}")
+    #         self.labelDescripcion.setText(f"Descripcion: <p style='color:red'>{searchTicket(showTickets())[3]}</p>")
+    #         try:
+    #             self.labelPrioridad.setText(f"Prioridad: {PrioColor[searchTicket(showTickets())[2]]}")
+    #         except:
+    #             self.labelPrioridad.setText("Prioridad: N/A")
             
-            self.labelInformado.setText(f"Informado: {searchTicket(NoTick)[5]}")
+    #         self.labelInformado.setText(f"Informado: {searchTicket(NoTick)[5]}")
         
         
 

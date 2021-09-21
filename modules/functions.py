@@ -13,7 +13,7 @@ def showUsers(comboBox):
     Parameters:
         comboBox: A combobox where you want to add the values of the names
     """
-
+    list = sql_table_show("Users")
     for a in range(len(list)):
         comboBox.addItem(list[a][0])
 
@@ -131,21 +131,4 @@ class UiResolver_Function:
     def __init__(self, UiResolver):
         UiResolver.buttonCerrar.clicked.connect(lambda: UiResolver.close())
 
-    return bdsql.tableResueltoWrite(Noticket, DescripcionResuelto, CerradoDia)
-
-
-def setTextContUsers(self):
-        self.labelTitle.setText("AGREGAR USUARIOS")
-        self.labelCedula.setText("Cedula")
-        self.labelUsuario.setText("Usuario")
-        self.labelNombre.setText("Nombre")
-        self.labelEquipo.setText("Equipo")
-        self.labelExt.setText("Ext")
-        self.labelBy.setText("By: De la Hoz")
-        self.buttonAgregar.setText("Agregar")
-        self.buttonCerrar.setText("Cerrar")
-        self.buttonAddUsers.setText("Add Users")
-        self.buttonEditUsers.setText("Edit Users")
-        self.buttonEditar.setText("Editar")
-        self.buttonEliminar.setText("Eliminar")
 

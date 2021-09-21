@@ -40,8 +40,6 @@ class MenuApp(QMainWindow):
         UiResolver_Function(self.mainResolver)
         
         self.btnResolver.clicked.connect(lambda: self.mainResolver.show())
-
-
         self.setCentralWidget(self.styles)
 
 if __name__ == '__main__':
