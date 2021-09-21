@@ -6,7 +6,6 @@ from modules import Ui_Ticket, Ui_Resolver, Ui_User
 import modules
 from modules.functions import *
 
-
 class MenuApp(QMainWindow):
     def __init__(self, parent=None, *args):
         super(MenuApp, self).__init__(parent=parent)
@@ -14,6 +13,7 @@ class MenuApp(QMainWindow):
         self.setWindowTitle("Sistema de Tickets")
         self.styles = QWidget(self)
         self.styles.setObjectName(u"styles")
+
         self.styles.setStyleSheet("#styles{background-color: rgb(40, 44, 52)}")
         
         self.stylesLayout = QVBoxLayout(self.styles)

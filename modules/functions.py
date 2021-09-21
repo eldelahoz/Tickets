@@ -1,8 +1,11 @@
 from datetime import datetime
-
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
 from . bdsql import *
+
+from . import bdsql
+
+
 
 def showUsers(comboBox):
     """
@@ -10,7 +13,7 @@ def showUsers(comboBox):
     Parameters:
         comboBox: A combobox where you want to add the values of the names
     """
-    list = showUsersNoms()
+
     for a in range(len(list)):
         comboBox.addItem(list[a][0])
 
@@ -23,19 +26,16 @@ def showDateNow():
     return datetime.now().strftime('%d/%m/%Y %H:%M:%S')
 
 def showTickets():
-    list = tableTickets()
     for a in list:
         if a[1] == "Abierto":
             return (a[0])
 
 def searchTicket(NoTicket):
-    list = tableTickets()
     for a in list:
         if a[0] == NoTicket:
             return a
         
 def ticketAbierto():
-    list = tableTickets()
     for a in list:
         if a[1] == "Abierto":
             return a[0]
@@ -130,4 +130,22 @@ class UiResolver_Function:
 
     def __init__(self, UiResolver):
         UiResolver.buttonCerrar.clicked.connect(lambda: UiResolver.close())
+
+    return bdsql.tableResueltoWrite(Noticket, DescripcionResuelto, CerradoDia)
+
+
+def setTextContUsers(self):
+        self.labelTitle.setText("AGREGAR USUARIOS")
+        self.labelCedula.setText("Cedula")
+        self.labelUsuario.setText("Usuario")
+        self.labelNombre.setText("Nombre")
+        self.labelEquipo.setText("Equipo")
+        self.labelExt.setText("Ext")
+        self.labelBy.setText("By: De la Hoz")
+        self.buttonAgregar.setText("Agregar")
+        self.buttonCerrar.setText("Cerrar")
+        self.buttonAddUsers.setText("Add Users")
+        self.buttonEditUsers.setText("Edit Users")
+        self.buttonEditar.setText("Editar")
+        self.buttonEliminar.setText("Eliminar")
 

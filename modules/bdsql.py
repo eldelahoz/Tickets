@@ -1,8 +1,6 @@
 import sqlite3
 from sqlite3 import Error
 
-# Connection database
-# //////////////////////////////////////////////
 def dbticket_connection():
     """
     The function create the connection to the database
@@ -26,6 +24,7 @@ def sql_table_show(table):
     cursorObj.execute(f"SELECT * FROM {table}")
     rows = cursorObj.fetchall()
     return rows
+
 # Add ticket item
 # //////////////////////////////////////
 def tableTicketsAdd(Prioridad, Descripcion, AbiertoDia, Informado):
@@ -42,8 +41,7 @@ def tableTicketsAdd(Prioridad, Descripcion, AbiertoDia, Informado):
     except:
         return 0
     
-# SHOW LAST TICKET
-# /////////////////////////////////////////
+
 def showLastTicket():
     """
     The function show number the last ticket
