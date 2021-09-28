@@ -345,9 +345,6 @@ class Ui_User(QMainWindow):
 
 
         # //////////////////////////////////
-        self.msg = QMessageBox()
-        grip = QSizeGrip(self.verticalFrame)
-
 
     def mousePressEvent(self, a0: QMouseEvent):
         self.clickPos = a0.globalPos()

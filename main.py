@@ -30,17 +30,19 @@ class MenuApp(QMainWindow):
         self.btnUsers = QPushButton("Usuarios", self)
         self.btnUsers.setGeometry(160, 30, 100, 40)
         self.mainUser = Ui_User()
-        UiTickets_Function.setFunctionUser(self.mainUser)
+        UiUser_Function.setFunctionUser(self.mainUser)
         self.btnUsers.clicked.connect(lambda: self.mainUser.show())
-        
 
         self.btnResolver = QPushButton("Resolver", self)
         self.btnResolver.setGeometry(95, 80, 100, 40)
-        self.mainResolver = Ui_Resolver()
-        UiResolver_Function(self.mainResolver)
-        
-        self.btnResolver.clicked.connect(lambda: self.mainResolver.show())
+
+        self.btnResolver.clicked.connect(lambda: self.open_resolver())
         self.setCentralWidget(self.styles)
+
+    def open_resolver(self):
+        mainResolver = Ui_Resolver()
+        mainResolver.show()
+        UiResolver_Function(mainResolver)
 
 if __name__ == '__main__':
     app = QApplication([])

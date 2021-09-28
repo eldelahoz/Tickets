@@ -18,19 +18,19 @@ QToolTip {
 }
 
 /* MESSAGE BOX */
-#msg {
+QMessageBox {
 	background-color: rgb(33, 37, 43);
 	
 }
 
-#msg QLabel{
+QMessageBox QLabel{
 	color: #aaa;
-	font-weight: bold;
+	
 }
 
-#msg .QPushButton { background-color: rgba(206, 206, 206, 0.288); border: none;  border-radius: 5px; }
-#msg .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: solid; border-radius: 4px; }
-#msg .QPushButton:pressed { background-color: rgb(23, 26, 30); border-style: solid; border-radius: 4px; }
+QMessageBox .QPushButton { background-color: rgba(206, 206, 206, 0.288); border: none;  border-radius: 5px; }
+QMessageBox .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: solid; border-radius: 4px; }
+QMessageBox .QPushButton:pressed { background-color: rgb(23, 26, 30); border-style: solid; border-radius: 4px; }
 
 #styles{
 	background-color: rgb(40, 44, 52);

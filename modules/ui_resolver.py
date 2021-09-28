@@ -53,7 +53,9 @@ class Ui_Resolver(QMainWindow):
         self.arrowRight.setObjectName(u"arrowRight")
         self.arrowRight.setMinimumSize(QSize(0, 25))
         self.arrowRight.setMaximumSize(QSize(25, 16777215))
-        self.arrowRight.setIcon(icon)
+        icon1 = QIcon()
+        icon1.addFile(u"images/icons/down-arrow.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.arrowRight.setIcon(icon1)
 
         self.leftTitleLayout.addWidget(self.arrowRight)
 
@@ -75,9 +77,9 @@ class Ui_Resolver(QMainWindow):
         self.minimizarBtn.setSizePolicy(sizePolicy1)
         self.minimizarBtn.setMinimumSize(QSize(28, 28))
         self.minimizarBtn.setMaximumSize(QSize(28, 28))
-        icon1 = QIcon()
-        icon1.addFile(u"images/icons/icon_minimize.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.minimizarBtn.setIcon(icon1)
+        icon2 = QIcon()
+        icon2.addFile(u"images/icons/icon_minimize.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.minimizarBtn.setIcon(icon2)
         self.minimizarBtn.setIconSize(QSize(20, 16))
 
         self.buttonRightLayout.addWidget(self.minimizarBtn)
@@ -86,9 +88,9 @@ class Ui_Resolver(QMainWindow):
         self.maximizarBtn.setObjectName(u"maximizarBtn")
         self.maximizarBtn.setMinimumSize(QSize(28, 28))
         self.maximizarBtn.setMaximumSize(QSize(28, 28))
-        icon2 = QIcon()
-        icon2.addFile(u"images/icons/icon_maximize.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.maximizarBtn.setIcon(icon2)
+        icon3 = QIcon()
+        icon3.addFile(u"images/icons/icon_maximize.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.maximizarBtn.setIcon(icon3)
         self.maximizarBtn.setIconSize(QSize(20, 20))
 
         self.buttonRightLayout.addWidget(self.maximizarBtn)
@@ -97,9 +99,9 @@ class Ui_Resolver(QMainWindow):
         self.cerrarBtn.setObjectName(u"cerrarBtn")
         self.cerrarBtn.setMinimumSize(QSize(28, 28))
         self.cerrarBtn.setMaximumSize(QSize(28, 28))
-        icon3 = QIcon()
-        icon3.addFile(u"images/icons/icon_close.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.cerrarBtn.setIcon(icon3)
+        icon4 = QIcon()
+        icon4.addFile(u"images/icons/icon_close.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.cerrarBtn.setIcon(icon4)
         self.cerrarBtn.setIconSize(QSize(20, 20))
 
         self.buttonRightLayout.addWidget(self.cerrarBtn)
@@ -241,6 +243,8 @@ class Ui_Resolver(QMainWindow):
     # retranslateUi
 
 
+        
+
     # def show(self) -> None:
     #     self.ticketActual()
     #     return super().show()
@@ -292,7 +296,9 @@ class Ui_Resolver(QMainWindow):
     #     else:
     #         msg.setText(f"No se pudo cerrar el ticket")
     #     msg.exec_()
-
+        
+        
     def mousePressEvent(self, a0: QMouseEvent):
         self.clickPos = a0.globalPos()
+
         

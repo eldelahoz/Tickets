@@ -240,13 +240,11 @@ class Ui_Ticket(QMainWindow):
     # retranslateUi
 
         
-        self.msg = QMessageBox(self.styles)
         # //////////////////////////////////
         self.timer = QTimer()
         self.timer.timeout.connect(self.startTitleChange)
         self.startTitleChange()
         # //////////////////////////////////
-        grip = QSizeGrip(self.verticalFrame1)
     
     def startTitleChange(self):
         self.timer.start(1000)

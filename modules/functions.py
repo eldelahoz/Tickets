@@ -1,11 +1,7 @@
 from datetime import datetime
 from PyQt5 import QtCore, QtGui
-from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
+from PyQt5.QtWidgets import QMessageBox, QSizeGrip, QTableWidgetItem
 from . bdsql import *
-
-from . import bdsql
-
-
 
 def showUsers(comboBox):
     """
@@ -15,7 +11,7 @@ def showUsers(comboBox):
     """
     list = sql_table_show("Users")
     for a in range(len(list)):
-        comboBox.addItem(list[a][0])
+        comboBox.addItem(list[a][1])
 
 def showDateNow():
     """
@@ -25,12 +21,14 @@ def showDateNow():
     """
     return datetime.now().strftime('%d/%m/%Y %H:%M:%S')
 
-def showTickets():
+def showTicketOpen():
+    list = tableTickets()
     for a in list:
         if a[1] == "Abierto":
             return (a[0])
 
 def searchTicket(NoTicket):
+    list = tableTickets()
     for a in list:
         if a[0] == NoTicket:
             return a
@@ -45,12 +43,19 @@ def ticketAbierto():
 def cerrarTicket(Noticket, DescripcionResuelto, CerradoDia):
     return tableResueltoWrite(Noticket, DescripcionResuelto, CerradoDia)
 
+# class BtnDefault:
+#     self.cerrarBtn.clicked.connect(lambda: self.close())
+
 
 class UiTickets_Function:
     def setFunctionsTicket(self):
         self.buttonCerrar.clicked.connect(lambda: self.close())
         self.cerrarBtn.clicked.connect(lambda: self.close())
         showUsers(self.usuariosBox)
+
+        self.msg = QMessageBox(self.styles)
+        QSizeGrip(self.verticalFrame1)
+        
                 
         def moveWindows(event):
             if event.buttons() == QtCore.Qt.LeftButton:
@@ -81,10 +86,15 @@ class UiTickets_Function:
     def addTitle(self):
         self.titulo.setText(f"{showLastTicket()+1}# Tickets {showDateNow()} ")
     
+
+class UiUser_Function:
     def setFunctionUser(self):
         self.buttonCerrar.clicked.connect(lambda: self.close())
         self.cerrarBtn.clicked.connect(lambda: self.close())
         self.buttonAddUsers.clicked.connect(lambda: self.centerContPage.setCurrentWidget(self.page))
+
+        self.msg = QMessageBox(self.styles)
+        QSizeGrip(self.verticalFrame)
         
         
         def moveWindows(event):
@@ -127,8 +137,46 @@ class UiTickets_Function:
         self.buttonEditUsers.clicked.connect(lambda: showViewUser())
 
 class UiResolver_Function:
-
     def __init__(self, UiResolver):
+        
         UiResolver.buttonCerrar.clicked.connect(lambda: UiResolver.close())
+        
+        UiResolver.cerrarBtn.clicked.connect(lambda: UiResolver.close())
+        
+        def moveWindows(event):
+            if event.buttons() == QtCore.Qt.LeftButton:
+                UiResolver.move(UiResolver.pos() + event.globalPos() - UiResolver.clickPos)
+                UiResolver.clickPos = event.globalPos()
+                event.accept()
 
+        UiResolver.topCont.mouseMoveEvent = moveWindows
+        UiResolver.label.mouseMoveEvent = moveWindows
+        QSizeGrip(UiResolver.verticalFrame) 
+        
 
+        NoTick = showTicketOpen()
+        msg = QMessageBox(UiResolver.styles)
+        msg.setObjectName(u"msg")
+        PrioColor = {
+            'Baja': "<span style='color:green'> Baja </span>",
+            'Media': "<span style='color:orange'> Media </span>",
+            'Alta': "<span style='color:red'> Alta </span>"
+        }
+        if NoTick is None:
+            msg.setText("No hay tickets")
+            msg.exec_()
+            UiResolver.label.setText("No hay ticket")
+            UiResolver.labelDescripcion.setText("Descripcion: N/A")
+            UiResolver.labelPrioridad.setText("Prioridad: N/A")
+            UiResolver.labelInformado.setText("Informado: N/A")
+        else:
+            UiResolver.label.setText(f"TICKET# {showTicketOpen()}")
+            UiResolver.labelDescripcion.setText(f"Descripcion: <p style='color:red'>{searchTicket(showLastTicket())[3]}</p>")
+            try:
+                UiResolver.labelPrioridad.setText(f"Prioridad: {PrioColor[searchTicket(showTicketOpen())[2]]}")
+            except:
+                UiResolver.labelPrioridad.setText("Prioridad: N/A")
+            
+            UiResolver.labelInformado.setText(f"Informado: {searchTicket(NoTick)[5]}")
+
+        

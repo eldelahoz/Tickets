@@ -21,7 +21,7 @@ def sql_table_show(table):
     """
 
     cursorObj = dbticket_connection().cursor()
-    cursorObj.execute(f"SELECT * FROM {table}")
+    cursorObj.execute(f"SELECT * FROM {table} ORDER BY Nombre")
     rows = cursorObj.fetchall()
     return rows
 
